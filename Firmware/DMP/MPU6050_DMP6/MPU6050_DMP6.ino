@@ -246,8 +246,8 @@ void setup() {
         Serial.println(F(")"));
     }
 
-    // configure LED for output
-    pinMode(LED_PIN, OUTPUT);
+//    // configure LED for output
+//    pinMode(LED_PIN, OUTPUT);
 }
 
 
@@ -338,6 +338,7 @@ void loop() {
             Serial.print(ypr[1] * 180/M_PI);
             Serial.print("\t");
             Serial.println(ypr[2] * 180/M_PI);
+            Serial.println("\n");
         #endif
 
 //        #ifdef OUTPUT_READABLE_REALACCEL

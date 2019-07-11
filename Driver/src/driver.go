@@ -10,19 +10,19 @@ import (
 )
 
 type Reader struct {
-	SerialNo string
-	Name     string
+	serialNo string
+	name     string
 	buffer   string
 	port     serial.Port
 }
 
 func (r Reader) Init(SerialNo string) {
-	r.SerialNo = SerialNo
+	r.serialNo = SerialNo
 	Name, err := findThePort(SerialNo)
 	if err != nil {
 		log.Fatal(err)
 	}
-	r.Name = Name
+	r.name = Name
 	mode := &serial.Mode{
 		BaudRate: 115200,
 		Parity:   serial.NoParity,
@@ -30,7 +30,7 @@ func (r Reader) Init(SerialNo string) {
 		StopBits: serial.OneStopBit,
 	}
 	r.port.SetMode(mode)
-	serial.Open(r.Name, mode)
+	serial.Open(r.name, mode)
 }
 func (r Reader) close() {
 	defer r.port.Close()
@@ -49,7 +49,7 @@ func (r Reader) read() {
 		r.buffer = r.buffer + string(buff)
 	}
 }
-func (r Reader) GetBuffer() (buffer string, err error) {
+func (r Reader) Buffer() (buffer string, err error) {
 	r.read()
 	return r.buffer, nil
 }
